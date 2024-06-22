@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    ViewData["Subtitle"] = "School Portal";
+    ViewData["PageOne"] = "Login";
+    ViewData["PageTwo"] = "SignUp";
+    ViewData["Action"] = "Index";
+}
+@model Student
+
+<div class="text-center  p-5 mb-5" style="width:35%; margin-left: 30%; background-color: #EDEDED; border-radius: 5%;margin-top: 100px;">
+
+    <div class="text-danger">
+        @ViewBag.Error
+    </div>
+
+    <form asp-controller="Login" asp-action="CheckLogin" method="post">
+
+        <input class="w-100 form-control" asp-for="Email" type="email" required placeholder="Email address" />
+     
+        <br />
+
+        <input class="w-100 form-control" asp-for="Password" type="password" required placeholder="Password"/>
+        <br />
+
+        <button class="btn btn-dark mt-3 w-100 mb-3" type="submit"> Login </button>
+        <br />
+        <a  class="mt-2 text-dark" asp-controller="Login" style="text-decoration: none;" asp-action="SignUp">Don't have an account signUp</a>
+    </form>
+    
+
+</div>
+

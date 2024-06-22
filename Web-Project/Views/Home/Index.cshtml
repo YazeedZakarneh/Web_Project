@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    ViewData["Subtitle"] = ViewBag.admin == 1 ? "Admin" : ViewBag.name;
+    ViewData["PageOne"] = "Logout";
+    ViewData["Action"] = "Logout";
+    if (ViewBag.courses.Count == 0 || ViewBag.admin == 1)
+        ViewData["a"] = "";
+    else
+    ViewData["a"] = "Assginments";
+
+}
+
+
+<div class="text-center" style="margin-top: 100px;">
+    @if (ViewBag.courses.Count == 0)
+    {
+        <div class="m-5 h3" style="color: grey">
+            There are no courses yet...
+        </div>
+
+        <img src="~/images/undraw_add_notes_re_ln36.png" width="500" hight="500" class="rounded-circle" alt="">
+
+    }
+    else
+    {
+        
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Hours</th>
+                <th scope="col">Section Name</th>
+                <th scope="col">Days</th>
+                
+                @if(ViewBag.admin == 1)
+                {
+                   <th scope="col"></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+               foreach (Dictionary<string, dynamic> x in ViewBag.courses)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <th scope="row">@x["courseName"]</th>
+                        <td>@x["courseHour"]</td>
+                        <td>@x["sectionName"]</td>
+                        <td>@x["days"]</td>
+                            @if (ViewBag.admin == 1)
+                            {
+                               
+                                <td><a class="text-danger" style="text-decoration: none" asp-controller="Home" asp-action="Delete" asp-route-id='@x["sectionId"]'>delete</a></td>
+                                
+                            }
+                    </tr>
+
+                    i++;
+                }
+            }
+        </tbody>
+        </table>
+
+        if(ViewBag.admin == 1)
+        {
+            <div style="text-align:left; margin-left: 13px">
+                <a asp-controller="Home" asp-action="ViewForm" style="text-decoration: none;">add</a>
+            </div>
+        }
+        
+     }
+
+</div>
+
+<script type = "text/javascript" >  
+    function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null };  
+</script> 
